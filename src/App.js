@@ -471,6 +471,32 @@ function App() {
           />
         </form>
         <div ref={bottomRef} />
+        <div className="stars">
+          {Array.from({ length: 100 }).map((_, i) => (
+            <div
+              key={i}
+              className="star"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                opacity: Math.random(),
+              }}
+            />
+          ))}
+          {/* Shooting Stars */}
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={`shooting-${i}`}
+              className="shooting-star"
+              style={{
+                top: `${Math.random() * 100}vh`,
+                left: `${Math.random() * 100}vw`,
+                animationDelay: `${Math.random() * 10}s`,
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
