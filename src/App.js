@@ -503,18 +503,12 @@ function App() {
   };
 
   const handleProjectClick = (project) => {
-    // Add exit animation class
-    const projectCards = document.querySelectorAll(".project-card");
-    projectCards.forEach((card) => card.classList.add("exiting"));
-
-    // Wait for animation and then navigate
-    setTimeout(() => {
-      if (project.demo) {
-        window.open(project.demo, "_blank");
-      } else if (project.github) {
-        window.open(project.github, "_blank");
-      }
-    }, 300);
+    // Open project link in new tab without removing cards
+    if (project.demo) {
+      window.open(project.demo, "_blank");
+    } else if (project.github) {
+      window.open(project.github, "_blank");
+    }
   };
 
   if (loading) {
