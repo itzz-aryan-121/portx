@@ -1112,3 +1112,37 @@ body {
     border-color: transparent;
   }
 }
+.rocket-container {
+  perspective: 1000px;
+  display: inline-block;
+}
+
+.rocket {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.rocket:hover {
+  transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+  box-shadow: 0 20px 30px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+.rocket.launch {
+  animation: liftoff 1.2s ease-out forwards;
+}
+
+@keyframes liftoff {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-150px) scale(1.1) rotate(-5deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-500px) scale(1.2);
+    opacity: 0;
+  }
+}
