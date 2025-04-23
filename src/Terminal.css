@@ -1174,7 +1174,7 @@ body {
     border-color: transparent;
   }
 }
-<<<<<<< HEAD
+
 .rocket-container {
   perspective: 1000px;
   display: inline-block;
@@ -1208,7 +1208,8 @@ body {
     transform: translateY(-500px) scale(1.2);
     opacity: 0;
   }
-=======
+
+}
 
 /* Theme Switcher Styles */
 .theme-switcher {
@@ -1558,5 +1559,5 @@ body {
   background: rgba(237, 242, 247, 0.8);
   border: 4px solid transparent;
   background-clip: padding-box;
->>>>>>> a656d590d97fa410376eab79116875339fef715e
+
 }
