@@ -158,22 +158,22 @@ function App() {
             type: "system-highlight",
           },
           {
-            text: "about        - Display basic information about me",
+            text: "About        - Display basic information about me",
             type: "system",
           },
-          { text: "skills       - List my technical skills", type: "system" },
+          { text: "Skills       - List my technical skills", type: "system" },
           {
-            text: "education    - Show my educational background",
+            text: "Education    - Show my educational background",
             type: "system",
           },
-          { text: "experience   - Display my work experience", type: "system" },
+          { text: "Experience   - Display my work experience", type: "system" },
           { text: "projects     - Show my projects", type: "system" },
           {
-            text: "activities   - List my extracurricular activities",
+            text: "Activities   - List my extracurricular activities",
             type: "system",
           },
           {
-            text: "contact      - Show my contact information",
+            text: "Contact      - Show my contact information",
             type: "system",
           },
           { text: "clear        - Clear the terminal", type: "system" },
@@ -245,14 +245,35 @@ function App() {
           { text: "", type: "output" },
         ]);
       case "projects":
-        return resumeData.projects.flatMap((project) => [
-          {
-            text: `${project.name} ${project.isLive ? "(Live Project)" : ""}`,
-            type: "output",
-          },
-          { text: `- ${project.description}`, type: "output" },
-          { text: "", type: "output" },
-        ]);
+        return [
+          { text: "My Projects:", type: "system-highlight" },
+          ...resumeData.projects.map((project) => ({
+            text: (
+              <div className="project-card" 
+                onClick={() => handleProjectClick(project)}
+                onKeyPress={(e) => e.key === 'Enter' && handleProjectClick(project)}
+                tabIndex={0}
+                role="button"
+                aria-label={`View project: ${project.name}`}
+              >
+                <div className="project-title">
+                  {project.name}
+                  {project.isLive && <span className="project-live-badge">LIVE</span>}
+                </div>
+                <div className="project-description">{project.description}</div>
+                <div className="project-links">
+                  {project.github && (
+                    <span className="project-link">GitHub →</span>
+                  )}
+                  {project.demo && (
+                    <span className="project-link">Live Demo →</span>
+                  )}
+                </div>
+              </div>
+            ),
+            type: "output-card"
+          }))
+        ];
       case "activities":
         return resumeData.activities.map((activity) => ({
           text: `- ${activity}`,
@@ -450,6 +471,21 @@ function App() {
     );
   };
 
+  const handleProjectClick = (project) => {
+    // Add exit animation class
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => card.classList.add('exiting'));
+
+    // Wait for animation and then navigate
+    setTimeout(() => {
+      if (project.demo) {
+        window.open(project.demo, '_blank');
+      } else if (project.github) {
+        window.open(project.github, '_blank');
+      }
+    }, 300);
+  };
+
   if (loading) {
     return (
       <div className="terminal-container">
@@ -505,7 +541,7 @@ function App() {
         <TechProfile />
         {history.map((item, index) => (
           <div key={index} className={`terminal-line ${item.type}`}>
-            {item.text}
+            {typeof item.text === 'string' ? item.text : item.text}
           </div>
         ))}
         <form onSubmit={handleSubmit} className="terminal-input-line">
