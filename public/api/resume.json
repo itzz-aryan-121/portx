@@ -1,0 +1,62 @@
+{
+  "personal": {
+    "name": "Aryan Tomar",
+    "location": "India",
+    "email": "your.email@example.com",
+    "phone": "Your Phone",
+    "linkedin": "https://linkedin.com/in/yourusername",
+    "portfolio": "https://yourportfolio.com"
+  },
+  "objective": "Passionate software developer with expertise in full-stack development and modern web technologies",
+  "skills": {
+    "technical": ["JavaScript", "React", "TypeScript", "Node.js"],
+    "databases": ["MongoDB", "PostgreSQL"],
+    "tools": ["Git", "Docker", "AWS"]
+  },
+  "education": [
+    {
+      "degree": "Your Degree",
+      "institution": "Your University",
+      "duration": "20XX - 20XX"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Software Engineer",
+      "company": "Company Name",
+      "location": "Location",
+      "duration": "Month YYYY - Present",
+      "responsibilities": [
+        "Responsibility 1",
+        "Responsibility 2"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Real Time Device Tracking",
+      "description": "Developed to track the live location of devices in real-time, providing enhanced monitoring capabilities.",
+      "isLive": true,
+      "demo": "https://realtime-device-track-1-l25r.onrender.com/",
+      "technologies": ["React", "Node.js", "WebSocket", "Maps API"]
+    },
+    {
+      "name": "QR Code Generator",
+      "description": "A full-featured QR code generator built with MERN stack, supporting custom colors, logos, and multiple formats including URLs and email.",
+      "isLive": true,
+      "demo": "https://qr-code-gen-new.vercel.app/",
+      "technologies": ["MongoDB", "Express", "React", "Node.js", "SVG"]
+    },
+    {
+      "name": "Boom App",
+      "description": "Designed to enable seamless and secure video communication between users, suitable for virtual meetings, interviews, and collaboration.",
+      "isLive": true,
+      "demo": "https://video-conferencing-app-tfa3.vercel.app/login",
+      "technologies": ["React", "WebRTC", "Socket.io", "Node.js", "Express"]
+    }
+  ],
+  "activities": [
+    "Activity 1",
+    "Activity 2"
+  ]
+} 
