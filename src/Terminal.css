@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap");
 
 :root {
+  /* Dark theme (default) */
   --bg-main: #0c0c16;
   --bg-terminal: #10101c;
   --bg-header: #090915;
@@ -21,6 +22,27 @@
   --rocket-window: #8be9fd;
   --rocket-fire: #ff5f56;
   --rocket-fire-alt: #ffbd2e;
+}
+
+.light-theme {
+  --bg-main: #e6e9ef;
+  --bg-terminal: #f8f9fa;
+  --bg-header: #edf2f7;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-accent: #0ea5e9;
+  --text-accent-alt: #8b5cf6;
+  --text-error: #ef4444;
+  --text-warning: #f59e0b;
+  --text-success: #10b981;
+  --text-info: #3b82f6;
+  --gradient-accent: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  --shadow-terminal: 0 20px 68px rgba(0, 0, 0, 0.15);
+  --rocket-primary: #2c3e50;
+  --rocket-secondary: #34495e;
+  --rocket-window: #3498db;
+  --rocket-fire: #e74c3c;
+  --rocket-fire-alt: #f39c12;
 }
 
 * {
@@ -768,6 +790,27 @@ body {
   flex-shrink: 0;
 }
 
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  animation: imageFade 3s forwards;
+}
+
+@keyframes imageFade {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .photo-frame {
   border: 2px solid var(--text-info);
   width: 100%;
@@ -775,6 +818,7 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  background: linear-gradient(135deg, #2b3040, #1a1b26);
 }
 
 .photo-placeholder {
@@ -787,6 +831,23 @@ body {
   font-size: 40px;
   font-weight: bold;
   color: var(--text-accent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  animation: scanFade 3s forwards;
+}
+
+@keyframes scanFade {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .scan-line {
@@ -798,6 +859,7 @@ body {
   background: var(--text-info);
   box-shadow: 0 0 10px rgba(139, 233, 253, 0.8);
   animation: scanLine 2s infinite;
+  z-index: 3;
 }
 
 @keyframes scanLine {
@@ -1112,6 +1174,7 @@ body {
     border-color: transparent;
   }
 }
+<<<<<<< HEAD
 .rocket-container {
   perspective: 1000px;
   display: inline-block;
@@ -1145,4 +1208,355 @@ body {
     transform: translateY(-500px) scale(1.2);
     opacity: 0;
   }
+=======
+
+/* Theme Switcher Styles */
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  background: var(--bg-header);
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-switcher:hover {
+  transform: scale(1.1) rotate(180deg);
+}
+
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.theme-icon.dark {
+  background: #FFC107;
+  box-shadow: 0 0 10px #FFC107;
+}
+
+.theme-icon.light {
+  background: #2c3e50;
+  box-shadow: 0 0 10px #2c3e50;
+}
+
+.sun-moon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.sun-moon-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.theme-icon.dark .sun-moon-inner {
+  background: #2c3e50;
+  transform: scale(0.8);
+}
+
+.theme-icon.light .sun-moon-inner {
+  background: #FFC107;
+  transform: scale(1);
+}
+
+.rays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease;
+}
+
+.ray {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: #2c3e50;
+  top: 0;
+  left: 50%;
+  transform-origin: 0 12px;
+  transition: all 0.5s ease;
+}
+
+.theme-icon.dark .ray {
+  opacity: 0;
+}
+
+.theme-icon.light .ray {
+  opacity: 1;
+}
+
+/* Light theme specific styles */
+.light-theme .terminal-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e6e9ef 100%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .terminal-body {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.light-theme .terminal-header {
+  background: linear-gradient(to right, #edf2f7, #f8f9fa);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.light-theme .terminal-line {
+  color: #2d3748;
+}
+
+.light-theme .terminal-line.command {
+  color: #38b2ac;
+}
+
+.light-theme .terminal-line.system {
+  color: #805ad5;
+}
+
+.light-theme .terminal-line.error {
+  color: #e53e3e;
+}
+
+.light-theme .terminal-prompt {
+  color: #38b2ac;
+}
+
+.light-theme .terminal-input {
+  color: #2d3748;
+  background: transparent;
+}
+
+.light-theme .terminal-cursor {
+  background-color: #38b2ac;
+}
+
+.light-theme .stars {
+  opacity: 0.3;
+}
+
+.light-theme .star {
+  background: rgba(45, 55, 72, 0.2);
+}
+
+.light-theme .shooting-star {
+  background: linear-gradient(-45deg, rgba(45, 55, 72, 0.2), transparent);
+}
+
+.light-theme .theme-switcher {
+  background: #edf2f7;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .terminal-title {
+  color: #4a5568;
+}
+
+/* Add a subtle pattern overlay for light theme */
+.light-theme .terminal-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.02) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.02) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  pointer-events: none;
+}
+
+/* Improve scrollbar for light theme */
+.light-theme .terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.light-theme .terminal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.light-theme .terminal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #38b2ac, #3182ce);
+  border-radius: 4px;
+}
+
+.light-theme .terminal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #319795, #2c5282);
+}
+
+/* Light theme profile section enhancements */
+.light-theme .tech-profile {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(237, 242, 247, 0.95));
+  border: 2px solid rgba(14, 165, 233, 0.3);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .tech-profile::before {
+  background: linear-gradient(
+    45deg,
+    transparent 48%,
+    rgba(14, 165, 233, 0.2) 50%,
+    transparent 52%
+  ) center / 300% 300%,
+  linear-gradient(
+    135deg,
+    transparent 48%,
+    rgba(139, 92, 246, 0.2) 50%,
+    transparent 52%
+  ) center / 300% 300%;
+  animation: scanEffect 3s infinite linear;
+}
+
+.light-theme .photo-frame {
+  border: 2px solid var(--text-accent);
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  box-shadow: 
+    0 0 0 4px rgba(14, 165, 233, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .scan-line {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--text-accent) 20%,
+    var(--text-accent) 80%,
+    transparent
+  );
+  height: 3px;
+  box-shadow: 
+    0 0 10px var(--text-accent),
+    0 0 20px var(--text-accent);
+  opacity: 0.7;
+}
+
+.light-theme .photo-placeholder {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: var(--text-accent);
+}
+
+.light-theme .stat-item {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(237, 242, 247, 0.7));
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(5px);
+}
+
+.light-theme .stat-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+}
+
+.light-theme .stat-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.light-theme .stat-value.active {
+  color: var(--text-success);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.light-theme .stat-value::before {
+  background-image: linear-gradient(
+    90deg,
+    var(--text-accent),
+    var(--text-accent-alt)
+  );
+}
+
+/* Enhanced terminal body for light theme */
+.light-theme .terminal-body {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.02),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.light-theme .terminal-line.command {
+  color: var(--text-accent);
+  text-shadow: 0 0 1px rgba(14, 165, 233, 0.1);
+}
+
+.light-theme .terminal-line.system {
+  color: var(--text-accent-alt);
+  text-shadow: 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+.light-theme .terminal-line.system-highlight {
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.1), transparent);
+  border-radius: 4px;
+  padding: 4px 24px;
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.light-theme .terminal-line.system-scan {
+  color: var(--text-warning);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.1), transparent);
+  border-radius: 4px;
+  padding: 4px 24px;
+}
+
+/* Improved theme switcher for light theme */
+.light-theme .theme-switcher {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(14, 165, 233, 0.1);
+}
+
+.light-theme .terminal-header {
+  background: linear-gradient(to right, #f8fafc, #ffffff);
+  border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Enhanced scrollbar for light theme */
+.light-theme .terminal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--text-accent), var(--text-accent-alt));
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.light-theme .terminal-body::-webkit-scrollbar-track {
+  background: rgba(237, 242, 247, 0.8);
+  border: 4px solid transparent;
+  background-clip: padding-box;
+>>>>>>> a656d590d97fa410376eab79116875339fef715e
 }

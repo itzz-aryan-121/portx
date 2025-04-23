@@ -15,6 +15,7 @@ function App() {
   const [autoShowPortfolio, setAutoShowPortfolio] = useState(false);
   const [portfolioSection, setPortfolioSection] = useState(0);
   const [showTechProfile, setShowTechProfile] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
   const bottomRef = useRef(null);
   const rocketRef = useRef(null);
 
@@ -66,33 +67,32 @@ function App() {
         ]);
 
         // Start the portfolio section display with random intervals
+        let currentSection = 0;
         portfolioInterval = setInterval(() => {
-          setPortfolioSection((prevSection) => {
-            if (prevSection >= portfolioSections.length) {
-              clearInterval(portfolioInterval);
-              setHistory((prev) => [
-                ...prev,
-                {
-                  text: "--- PROFILE SCAN COMPLETE ---",
-                  type: "system-highlight",
-                },
-                { text: "Type any command to continue...", type: "system" },
-              ]);
-              setAutoShowPortfolio(false);
-              return prevSection;
-            }
-
-            const command = portfolioSections[prevSection];
-            const result = executeCommand(command);
-
+          if (currentSection >= portfolioSections.length) {
+            clearInterval(portfolioInterval);
             setHistory((prev) => [
               ...prev,
-              { text: `$ ${command}`, type: "command-auto" },
-              ...result,
+              {
+                text: "--- PROFILE SCAN COMPLETE ---",
+                type: "system-highlight",
+              },
+              { text: "Type any command to continue...", type: "system" },
             ]);
+            setAutoShowPortfolio(false);
+            return;
+          }
 
-            return prevSection + 1;
-          });
+          const command = portfolioSections[currentSection];
+          const result = executeCommand(command);
+
+          setHistory((prev) => [
+            ...prev,
+            { text: `$ ${command}`, type: "command-auto" },
+            ...result,
+          ]);
+
+          currentSection++;
         }, Math.floor(Math.random() * 4000) + 5000); // Random interval between 5-9 seconds
       }, 3000); // 3 seconds initial delay after rocket animation
 
@@ -367,7 +367,6 @@ function App() {
     return (
       <div className="tech-profile">
         <div className="profile-photo">
-          {/* Placeholder for profile photo - replace with actual photo URL */}
           <div className="photo-frame">
             <div className="photo-placeholder">
               <span>
@@ -375,6 +374,11 @@ function App() {
                 {resumeData.personal.name.split(" ")[1][0]}
               </span>
             </div>
+            <img 
+              src="/images/profile.jpg" 
+              alt="Profile" 
+              className="profile-image"
+            />
           </div>
           <div className="scan-line"></div>
         </div>
@@ -396,6 +400,28 @@ function App() {
           <div className="stat-item">
             <span className="stat-label">SPECIALIZATION:</span>
             <span className="stat-value">FULL STACK DEVELOPMENT</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    document.body.classList.toggle('light-theme');
+  };
+
+  const ThemeSwitcher = () => {
+    return (
+      <div className="theme-switcher" onClick={toggleTheme}>
+        <div className={`theme-icon ${isDarkTheme ? 'dark' : 'light'}`}>
+          <div className="sun-moon">
+            <div className="sun-moon-inner"></div>
+          </div>
+          <div className="rays">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="ray" style={{ transform: `rotate(${i * 45}deg)` }}></div>
+            ))}
           </div>
         </div>
       </div>
@@ -442,7 +468,8 @@ function App() {
   }
 
   return (
-    <div className="terminal-container">
+    <div className={`terminal-container ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
+      <ThemeSwitcher />
       <div className="terminal-header">
         <div className="terminal-buttons">
           <div className="terminal-button red"></div>
