@@ -35,12 +35,20 @@ function App() {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await axios.get("/api/resume");
+        const response = await axios.get("/api/resume.json");
         setResumeData(response.data);
         setLoading(false);
       } catch (err) {
-        setError("Failed to load resume data");
+        console.error("Failed to load resume data:", err);
+        setError("Failed to load resume data. Please refresh the page.");
         setLoading(false);
+        setHistory(prev => [
+          ...prev,
+          { 
+            text: "Error: Failed to load portfolio data. Please refresh the page.",
+            type: "error"
+          }
+        ]);
       }
     };
 
@@ -141,9 +149,9 @@ function App() {
     if (!resumeData && cmd !== "clear" && cmd !== "start" && cmd !== "help") {
       return [
         {
-          text: `${cmd}: Command not executed - Resume data is loading...`,
-          type: "error",
-        },
+          text: "Loading resume data... Please try again in a moment.",
+          type: "system"
+        }
       ];
     }
 

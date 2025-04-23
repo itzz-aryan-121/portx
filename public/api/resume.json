@@ -1,0 +1,84 @@
+{
+  "personal": {
+    "name": "Aryan Tomar",
+    "location": "India",
+    "email": "aryantomar239@gmail.com",
+    "phone": "7617605666",
+    "linkedin": "https://www.linkedin.com/in/aryan-t-494482251/",
+    "portfolio": "https://aryantomar.vercel.app/"
+  },
+  "objective": "As an aspiring Full Stack Developer with a strong foundation in HTML, CSS, JavaScript, ReactJS, Node.js, and MongoDB etc. My goal is to design and develop user-centric applications that provide seamless user experiences.",
+  "skills": {
+    "technical": [
+      "HTML 5",
+      "CSS 3",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "React JS",
+      "Tailwind",
+      "NextJs"
+    ],
+    "databases": ["MongoDB", "Firebase", "Convex", "SQL"],
+    "tools": ["Git", "Github"]
+  },
+  "education": [
+    {
+      "degree": "B.Tech in Information Technology",
+      "institution": "ABES ENGINEERING COLLEGE",
+      "duration": "2022-2026"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Developer Intern",
+      "company": "Elysion Softwares Pvt. Ltd.",
+      "location": "Gurugram, India",
+      "duration": "Jan 2025 - Present",
+      "responsibilities": [
+        "Developed Shopify Store for Company's Product"
+      ]
+    },
+    {
+      "title": "Web Developer Intern",
+      "company": "Zidio Development",
+      "location": "Bangalore, India",
+      "duration": "Sep 2024 - Dec 2024",
+      "responsibilities": [
+        "Developed MERN Stack Projects for Company Welfare",
+        "Redesigned Company Website and improved UX",
+        "Gained Expertise in Web Sockets and UI Design"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Real Time Device Tracking",
+      "description": "Developed to track the live location of devices in real-time, providing enhanced monitoring capabilities.",
+      "isLive": true,
+      "demo": "https://realtime-device-track-1-l25r.onrender.com/",
+      "technologies": ["React", "Node.js", "WebSocket", "Maps API"]
+    },
+    {
+      "name": "QR Code Generator",
+      "description": "A full-featured QR code generator built with MERN stack, supporting custom colors, logos, and multiple formats including URLs and email.",
+      "isLive": true,
+      "demo": "https://qr-code-gen-new.vercel.app/",
+      "technologies": ["MongoDB", "Express", "React", "Node.js", "SVG"]
+    },
+    {
+      "name": "Boom App",
+      "description": "Designed to enable seamless and secure video communication between users, suitable for virtual meetings, interviews, and collaboration.",
+      "isLive": true,
+      "demo": "https://video-conferencing-app-tfa3.vercel.app/login",
+      "technologies": ["React", "WebRTC", "Socket.io", "Node.js", "Express"]
+    }
+  ],
+  "activities": [
+    "Technical Events: Participated in hackathons, coding challenges, and tech fests. Attended workshops and seminars on emerging technologies like AI, ML, and blockchain.",
+    "Leadership Roles: Served as a team lead in group projects and college committees. Organized events and webinars for peers.",
+    "Clubs and Societies: Member of coding club Enigma and active involvement in college technical society.",
+    "Sports: Played Badminton and won Various Competitions"
+  ]
+} 
