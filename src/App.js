@@ -19,6 +19,9 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const bottomRef = useRef(null);
   const rocketRef = useRef(null);
+  const [showProfilePhoto, setShowProfilePhoto] = useState(false);
+  const [showProfileDetails, setShowProfileDetails] = useState(false);
+  const [scanningText, setScanningText] = useState(false);
 
   const portfolioSections = [
     "about",
@@ -51,54 +54,69 @@ function App() {
 
   // Auto-show portfolio effect
   useEffect(() => {
-    let portfolioInterval;
+    let profileInterval;
     let initialDelayTimeout;
 
     if (autoShowPortfolio && resumeData) {
       // Initial delay before starting the auto-showcase
       initialDelayTimeout = setTimeout(() => {
         setShowTechProfile(true);
+        setScanningText(true);
 
-        // Add profile introduction
+        // Add profile introduction with gaming style text
         setHistory((prev) => [
           ...prev,
           { text: "--- INITIATING PROFILE SCAN ---", type: "system-highlight" },
-          { text: "Loading agent profile data...", type: "system-scan" },
         ]);
 
-        // Start the portfolio section display with random intervals
-        let currentSection = 0;
-        portfolioInterval = setInterval(() => {
-          if (currentSection >= portfolioSections.length) {
-            clearInterval(portfolioInterval);
-            setHistory((prev) => [
-              ...prev,
-              {
-                text: "--- PROFILE SCAN COMPLETE ---",
-                type: "system-highlight",
-              },
-              { text: "Type any command to continue...", type: "system" },
-            ]);
-            setAutoShowPortfolio(false);
-            return;
-          }
-
-          const command = portfolioSections[currentSection];
-          const result = executeCommand(command);
-
+        // Start photo scan after 2 seconds
+        setTimeout(() => {
+          setShowProfilePhoto(true);
           setHistory((prev) => [
             ...prev,
-            { text: `$ ${command}`, type: "command-auto" },
-            ...result,
+            { text: "► Scanning agent photo...", type: "system-scan" },
           ]);
 
-          currentSection++;
-        }, Math.floor(Math.random() * 4000) + 5000); // Random interval between 5-9 seconds
-      }, 3000); // 3 seconds initial delay after rocket animation
+          // Show profile details after 3 more seconds
+          setTimeout(() => {
+            setShowProfileDetails(true);
+            setHistory((prev) => [
+              ...prev,
+              { text: "► Retrieving agent data...", type: "system-scan" },
+            ]);
+
+            // Start the portfolio section display
+            let currentSection = 0;
+            profileInterval = setInterval(() => {
+              if (currentSection >= portfolioSections.length) {
+                clearInterval(profileInterval);
+                setHistory((prev) => [
+                  ...prev,
+                  { text: "--- PROFILE SCAN COMPLETE ---", type: "system-highlight" },
+                  { text: "Type any command to continue...", type: "system" },
+                ]);
+                setAutoShowPortfolio(false);
+                return;
+              }
+
+              const command = portfolioSections[currentSection];
+              const result = executeCommand(command);
+
+              setHistory((prev) => [
+                ...prev,
+                { text: `$ ${command}`, type: "command-auto" },
+                ...result,
+              ]);
+
+              currentSection++;
+            }, Math.floor(Math.random() * 4000) + 5000);
+          }, 3000);
+        }, 2000);
+      }, 3000);
 
       return () => {
         clearTimeout(initialDelayTimeout);
-        clearInterval(portfolioInterval);
+        clearInterval(profileInterval);
       };
     }
   }, [autoShowPortfolio, resumeData]);
@@ -108,9 +126,11 @@ function App() {
   };
 
   const resetPortfolioShowcase = () => {
-    // Reset all states related to the showcase
     setPortfolioSection(0);
     setShowTechProfile(false);
+    setShowProfilePhoto(false);
+    setShowProfileDetails(false);
+    setScanningText(false);
     setAutoShowPortfolio(false);
   };
 
@@ -138,22 +158,22 @@ function App() {
             type: "system-highlight",
           },
           {
-            text: "about        - Display basic information about me",
+            text: "About        - Display basic information about me",
             type: "system",
           },
-          { text: "skills       - List my technical skills", type: "system" },
+          { text: "Skills       - List my technical skills", type: "system" },
           {
-            text: "education    - Show my educational background",
+            text: "Education    - Show my educational background",
             type: "system",
           },
-          { text: "experience   - Display my work experience", type: "system" },
+          { text: "Experience   - Display my work experience", type: "system" },
           { text: "projects     - Show my projects", type: "system" },
           {
-            text: "activities   - List my extracurricular activities",
+            text: "Activities   - List my extracurricular activities",
             type: "system",
           },
           {
-            text: "contact      - Show my contact information",
+            text: "Contact      - Show my contact information",
             type: "system",
           },
           { text: "clear        - Clear the terminal", type: "system" },
@@ -225,14 +245,35 @@ function App() {
           { text: "", type: "output" },
         ]);
       case "projects":
-        return resumeData.projects.flatMap((project) => [
-          {
-            text: `${project.name} ${project.isLive ? "(Live Project)" : ""}`,
-            type: "output",
-          },
-          { text: `- ${project.description}`, type: "output" },
-          { text: "", type: "output" },
-        ]);
+        return [
+          { text: "My Projects:", type: "system-highlight" },
+          ...resumeData.projects.map((project) => ({
+            text: (
+              <div className="project-card" 
+                onClick={() => handleProjectClick(project)}
+                onKeyPress={(e) => e.key === 'Enter' && handleProjectClick(project)}
+                tabIndex={0}
+                role="button"
+                aria-label={`View project: ${project.name}`}
+              >
+                <div className="project-title">
+                  {project.name}
+                  {project.isLive && <span className="project-live-badge">LIVE</span>}
+                </div>
+                <div className="project-description">{project.description}</div>
+                <div className="project-links">
+                  {project.github && (
+                    <span className="project-link">GitHub →</span>
+                  )}
+                  {project.demo && (
+                    <span className="project-link">Live Demo →</span>
+                  )}
+                </div>
+              </div>
+            ),
+            type: "output-card"
+          }))
+        ];
       case "activities":
         return resumeData.activities.map((activity) => ({
           text: `- ${activity}`,
@@ -361,12 +402,12 @@ function App() {
     );
   };
 
-  const renderTechProfile = () => {
-    if (!showTechProfile || !resumeData) return null;
+  const TechProfile = () => {
+    if (!showTechProfile) return null;
 
     return (
       <div className="tech-profile">
-        <div className="profile-photo">
+        <div className={`profile-photo ${showProfilePhoto ? 'show' : ''}`}>
           <div className="photo-frame">
             <div className="photo-placeholder">
               <span>
@@ -382,26 +423,28 @@ function App() {
           </div>
           <div className="scan-line"></div>
         </div>
-        <div className="profile-stats">
-          <div className="stat-item">
-            <span className="stat-label">AGENT ID:</span>
-            <span className="stat-value">
-              DEV-{Math.floor(Math.random() * 9000) + 1000}
-            </span>
+        {showProfileDetails && (
+          <div className="profile-stats">
+            <div className="stat-item">
+              <span className="stat-label">AGENT ID:</span>
+              <span className="stat-value">
+                DEV-{Math.floor(Math.random() * 9000) + 1000}
+              </span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">STATUS:</span>
+              <span className="stat-value active">ACTIVE</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">CLEARANCE:</span>
+              <span className="stat-value">LEVEL 5</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">SPECIALIZATION:</span>
+              <span className="stat-value">FULL STACK DEVELOPMENT</span>
+            </div>
           </div>
-          <div className="stat-item">
-            <span className="stat-label">STATUS:</span>
-            <span className="stat-value active">ACTIVE</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">CLEARANCE:</span>
-            <span className="stat-value">LEVEL 5</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">SPECIALIZATION:</span>
-            <span className="stat-value">FULL STACK DEVELOPMENT</span>
-          </div>
-        </div>
+        )}
       </div>
     );
   };
@@ -430,6 +473,21 @@ function App() {
         </div>
       </div>
     );
+  };
+
+  const handleProjectClick = (project) => {
+    // Add exit animation class
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => card.classList.add('exiting'));
+
+    // Wait for animation and then navigate
+    setTimeout(() => {
+      if (project.demo) {
+        window.open(project.demo, '_blank');
+      } else if (project.github) {
+        window.open(project.github, '_blank');
+      }
+    }, 300);
   };
 
   if (loading) {
@@ -488,10 +546,10 @@ function App() {
       </div>
       <div className="terminal-body">
         {showRocket && renderRocketAnimation()}
-        {renderTechProfile()}
+        <TechProfile />
         {history.map((item, index) => (
           <div key={index} className={`terminal-line ${item.type}`}>
-            {item.text}
+            {typeof item.text === 'string' ? item.text : item.text}
           </div>
         ))}
         <form onSubmit={handleSubmit} className="terminal-input-line">
