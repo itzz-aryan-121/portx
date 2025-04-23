@@ -2,33 +2,53 @@
   "personal": {
     "name": "Aryan Tomar",
     "location": "India",
-    "email": "your.email@example.com",
-    "phone": "Your Phone",
-    "linkedin": "https://linkedin.com/in/yourusername",
-    "portfolio": "https://yourportfolio.com"
+    "email": "aryantomar239@gmail.com",
+    "phone": "7617605666",
+    "linkedin": "https://www.linkedin.com/in/aryan-t-494482251/",
+    "portfolio": "https://aryantomar.vercel.app/"
   },
-  "objective": "Passionate software developer with expertise in full-stack development and modern web technologies",
+  "objective": "As an aspiring Full Stack Developer with a strong foundation in HTML, CSS, JavaScript, ReactJS, Node.js, and MongoDB etc. My goal is to design and develop user-centric applications that provide seamless user experiences.",
   "skills": {
-    "technical": ["JavaScript", "React", "TypeScript", "Node.js"],
-    "databases": ["MongoDB", "PostgreSQL"],
-    "tools": ["Git", "Docker", "AWS"]
+    "technical": [
+      "HTML 5",
+      "CSS 3",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "React JS",
+      "Tailwind",
+      "NextJs"
+    ],
+    "databases": ["MongoDB", "Firebase", "Convex", "SQL"],
+    "tools": ["Git", "Github"]
   },
   "education": [
     {
-      "degree": "Your Degree",
-      "institution": "Your University",
-      "duration": "20XX - 20XX"
+      "degree": "B.Tech in Information Technology",
+      "institution": "ABES ENGINEERING COLLEGE",
+      "duration": "2022-2026"
     }
   ],
   "experience": [
     {
-      "title": "Software Engineer",
-      "company": "Company Name",
-      "location": "Location",
-      "duration": "Month YYYY - Present",
+      "title": "Full Stack Developer Intern",
+      "company": "Elysion Softwares Pvt. Ltd.",
+      "location": "Gurugram, India",
+      "duration": "Jan 2025 - Present",
       "responsibilities": [
-        "Responsibility 1",
-        "Responsibility 2"
+        "Developed Shopify Store for Company's Product"
+      ]
+    },
+    {
+      "title": "Web Developer Intern",
+      "company": "Zidio Development",
+      "location": "Bangalore, India",
+      "duration": "Sep 2024 - Dec 2024",
+      "responsibilities": [
+        "Developed MERN Stack Projects for Company Welfare",
+        "Redesigned Company Website and improved UX",
+        "Gained Expertise in Web Sockets and UI Design"
       ]
     }
   ],
@@ -56,7 +76,9 @@
     }
   ],
   "activities": [
-    "Activity 1",
-    "Activity 2"
+    "Technical Events: Participated in hackathons, coding challenges, and tech fests. Attended workshops and seminars on emerging technologies like AI, ML, and blockchain.",
+    "Leadership Roles: Served as a team lead in group projects and college committees. Organized events and webinars for peers.",
+    "Clubs and Societies: Member of coding club Enigma and active involvement in college technical society.",
+    "Sports: Played Badminton and won Various Competitions"
   ]
 } 
