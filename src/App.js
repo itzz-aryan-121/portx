@@ -92,7 +92,10 @@ function App() {
                 clearInterval(profileInterval);
                 setHistory((prev) => [
                   ...prev,
-                  { text: "--- PROFILE SCAN COMPLETE ---", type: "system-highlight" },
+                  {
+                    text: "--- PROFILE SCAN COMPLETE ---",
+                    type: "system-highlight",
+                  },
                   { text: "Type any command to continue...", type: "system" },
                 ]);
                 setAutoShowPortfolio(false);
@@ -249,16 +252,21 @@ function App() {
           { text: "My Projects:", type: "system-highlight" },
           ...resumeData.projects.map((project) => ({
             text: (
-              <div className="project-card" 
+              <div
+                className="project-card"
                 onClick={() => handleProjectClick(project)}
-                onKeyPress={(e) => e.key === 'Enter' && handleProjectClick(project)}
+                onKeyPress={(e) =>
+                  e.key === "Enter" && handleProjectClick(project)
+                }
                 tabIndex={0}
                 role="button"
                 aria-label={`View project: ${project.name}`}
               >
                 <div className="project-title">
                   {project.name}
-                  {project.isLive && <span className="project-live-badge">LIVE</span>}
+                  {project.isLive && (
+                    <span className="project-live-badge">LIVE</span>
+                  )}
                 </div>
                 <div className="project-description">{project.description}</div>
                 <div className="project-links">
@@ -271,8 +279,8 @@ function App() {
                 </div>
               </div>
             ),
-            type: "output-card"
-          }))
+            type: "output-card",
+          })),
         ];
       case "activities":
         return resumeData.activities.map((activity) => ({
@@ -401,13 +409,24 @@ function App() {
       </div>
     );
   };
+  <input
+    type="text"
+    value={input}
+    onChange={handleInputChange}
+    autoFocus
+    className="terminal-input"
+    spellCheck="false"
+    aria-label="Terminal command input"
+    autoCapitalize="off" // Prevent auto-capitalization on mobile
+    autoComplete="off"
+  />;
 
   const TechProfile = () => {
     if (!showTechProfile) return null;
 
     return (
       <div className="tech-profile">
-        <div className={`profile-photo ${showProfilePhoto ? 'show' : ''}`}>
+        <div className={`profile-photo ${showProfilePhoto ? "show" : ""}`}>
           <div className="photo-frame">
             <div className="photo-placeholder">
               <span>
@@ -477,15 +496,15 @@ function App() {
 
   const handleProjectClick = (project) => {
     // Add exit animation class
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => card.classList.add('exiting'));
+    const projectCards = document.querySelectorAll(".project-card");
+    projectCards.forEach((card) => card.classList.add("exiting"));
 
     // Wait for animation and then navigate
     setTimeout(() => {
       if (project.demo) {
-        window.open(project.demo, '_blank');
+        window.open(project.demo, "_blank");
       } else if (project.github) {
-        window.open(project.github, '_blank');
+        window.open(project.github, "_blank");
       }
     }, 300);
   };
@@ -549,7 +568,7 @@ function App() {
         <TechProfile />
         {history.map((item, index) => (
           <div key={index} className={`terminal-line ${item.type}`}>
-            {typeof item.text === 'string' ? item.text : item.text}
+            {typeof item.text === "string" ? item.text : item.text}
           </div>
         ))}
         <form onSubmit={handleSubmit} className="terminal-input-line">
