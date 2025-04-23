@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState(null);
   const [showRocket, setShowRocket] = useState(false);
   const [autoShowPortfolio, setAutoShowPortfolio] = useState(false);
+
   const [portfolioSection, setPortfolioSection] = useState(0);
   const [showTechProfile, setShowTechProfile] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -28,7 +29,6 @@ function App() {
     "activities",
     "contact",
   ];
-
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
@@ -374,9 +374,9 @@ function App() {
                 {resumeData.personal.name.split(" ")[1][0]}
               </span>
             </div>
-            <img 
-              src="/images/profile.jpg" 
-              alt="Profile" 
+            <img
+              src="/images/profile.jpg"
+              alt="Profile"
               className="profile-image"
             />
           </div>
@@ -408,19 +408,23 @@ function App() {
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
-    document.body.classList.toggle('light-theme');
+    document.body.classList.toggle("light-theme");
   };
 
   const ThemeSwitcher = () => {
     return (
       <div className="theme-switcher" onClick={toggleTheme}>
-        <div className={`theme-icon ${isDarkTheme ? 'dark' : 'light'}`}>
+        <div className={`theme-icon ${isDarkTheme ? "dark" : "light"}`}>
           <div className="sun-moon">
             <div className="sun-moon-inner"></div>
           </div>
           <div className="rays">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="ray" style={{ transform: `rotate(${i * 45}deg)` }}></div>
+              <div
+                key={i}
+                className="ray"
+                style={{ transform: `rotate(${i * 45}deg)` }}
+              ></div>
             ))}
           </div>
         </div>
@@ -468,7 +472,11 @@ function App() {
   }
 
   return (
-    <div className={`terminal-container ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
+    <div
+      className={`terminal-container ${
+        isDarkTheme ? "dark-theme" : "light-theme"
+      }`}
+    >
       <ThemeSwitcher />
       <div className="terminal-header">
         <div className="terminal-buttons">
